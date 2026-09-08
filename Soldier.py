@@ -1,12 +1,22 @@
 import consts
 import game_field
 
-def soldier_head(row, col):
-    return game_field.field[row][col] == consts.SOLDIER_CELL
+#return left_upper head
+def soldier_head():
+    for row in range(consts.BOARD_ROWS):
+        for col in range(consts.BOARD_COLS):
+            if game_field.field[row][col] == consts.SOLDIER_CELL:
+                return row, col
+    return None
 
 
-def soldier_feet(row, col):
-    return (row + 3, col), (row + 3, col + 1)
+#return left_foot
+def soldier_feet():
+    for row in range(consts.BOARD_ROWS):
+        for col in range(consts.BOARD_COLS):
+            if game_field.field[row][col] == consts.SOLDIER_CELL:
+                return consts.SOLDIER_BODY_ROWS + row, col
+    return None
 
 
 def border(new_location): #[0] - row, [1] - col
@@ -14,17 +24,5 @@ def border(new_location): #[0] - row, [1] - col
         return False
     return True
 
-
-def set_location(row, col, direction):
-    if direction == consts.DOWN:
-        return (row + 1, col)
-    elif direction == consts.UP:
-        return (row - 1, col)
-    elif direction == consts.LEFT:
-        return (row, col - 1)
-    elif direction == consts.RIGHT:
-        return (row, col + 1)
-
-    return None
 
 

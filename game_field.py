@@ -2,7 +2,7 @@ import consts
 import random
 import Soldier
 
-field = []
+field = [[consts.EMPTY_CELL for col in range(consts.BOARD_COLS)] for row in range(consts.BOARD_ROWS)]
 
 def build_field():
     global field
@@ -12,7 +12,7 @@ def build_field():
 
     #start soldier pos
     for row in range(consts.SOLDIER_ROWS):
-        for col in range(1, consts.SOLDIER_COLS):
+        for col in range(1, 1 + consts.SOLDIER_COLS):
             field[row][col] = consts.SOLDIER_CELL
 
     #define random place for bombs
@@ -20,7 +20,9 @@ def build_field():
         rnd_place_bomb_r = random.randint(0, consts.BOARD_ROWS - 1)
         rnd_place_bomb_c = random.randint(0, consts.BOARD_COLS - 1)
         while field[rnd_place_bomb_r][rnd_place_bomb_c] == consts.SOLDIER_CELL or \
-            field[rnd_place_bomb_r][rnd_place_bomb_c] == consts.BOMB_CELL:
+            field[rnd_place_bomb_r][rnd_place_bomb_c] == consts.BOMB_CELL or \
+                field[rnd_place_bomb_r][rnd_place_bomb_c] == consts.FLAG_CELL or \
+                rnd_place_bomb_c + consts.BOMB_LEN >= consts.BOARD_COLS:
             rnd_place_bomb_r = random.randint(0, consts.BOARD_ROWS - 1)
             rnd_place_bomb_c = random.randint(0, consts.BOARD_COLS - 1)
         consts.bomb_list.append((rnd_place_bomb_r, rnd_place_bomb_c))
@@ -30,22 +32,29 @@ def build_field():
         for col in range(bomb[1], bomb[1] + consts.BOMB_LEN):
             field[bomb[0]][col] = consts.BOMB_CELL
 
-    #fill flag pos
+    #fill flag position
     for row in range(flag_row, consts.BOARD_ROWS):
         for col in range(flag_col, consts.BOARD_COLS):
             field[row][col] = consts.FLAG_CELL
 
 
 def set_location(direction):
-    new_head_location = check_cell(Soldier.soldier_head(), direction)
-    for row in range(new_head_location[0] + consts.SOLDIER_BODY_ROWS, new_head_location[0], - 1):
-        for col in range(new_head_location[1], new_head_location[1] + consts.SOLDIER_COLS):
-            if field[row][col] == consts.BOMB_CELL:
-                return False
-            elif field[row][col] == consts.FLAG_CELL:
-                return True
-            elif field[row][col] == consts.EMPTY_CELL:
-                field[row][col] = consts.SOLDIER_CELL
+    head = Soldier.soldier_head()
+
+    new_head_location = check_cell(head[0], head[1], direction)
+    if Soldier.border(new_head_location):
+        for row in range(new_head_location[0] + consts.SOLDIER_BODY_ROWS, new_head_location[0], - 1):
+            for col in range(new_head_location[1], new_head_location[1] + consts.SOLDIER_COLS):
+                if field[row][col] == consts.BOMB_CELL:
+                    return False
+                elif field[row][col] == consts.FLAG_CELL:
+                    return True
+                elif field[row][col] == consts.EMPTY_CELL:
+                    field[row][col] = consts.SOLDIER_CELL
+                    field[head[0]][head[1]] = consts.EMPTY_CELL
+                    field[head[0]][head[1] + 1] = consts.EMPTY_CELL
+    else:
+        print("Out of board")
 
     return None
 

@@ -40,3 +40,17 @@ BOMB_IMG = "bin/mine.png"
 
 
 GREEN = (0,70,0)
+SOLDIER_CELL = "soldier"
+
+RUNNING_STATE = 1
+LOSE_STATE = 2
+WIN_STATE = 3
+
+DOWN = "down"
+UP = "up"
+LEFT = "left"
+RIGHT = "right"
+
+bomb_list = []
+BOMBS_AMOUNT = 20
+BOMB_LEN = 3

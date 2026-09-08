@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 __pycache__/
 *.pyc
 .env
 venv/
 node_modules/
 .idea/
+=======
+__pycache__/
+*.pyc
+.env
+venv/
+node_modules/
+.idea/
+>>>>>>> fe5c9a2863d7981e475b67d74ead3d05e39875e7
 .DS_STORE

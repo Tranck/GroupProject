@@ -1,13 +1,11 @@
 import pygame
 import consts
 import random
-
+import time
 
 screen = pygame.display.set_mode(
         (consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
 screen.fill(consts.GREEN)
-
-
 objects = {} #loading all the images into here
 
 def create_soldier():
@@ -54,7 +52,12 @@ def place_grass():
         y = random.randrange(0, consts.BOARD_ROWS-1, consts.GRASS_ROWS)
         if (x,y) not in consts.grass_place and (x,y) not in consts.bomb_list:
             consts.grass_place.append((x,y))
-    #blitsing the grass into the board
+    #blit-ing the grass into the board
+    for item in consts.grass_place:
+        place = (item[0] * consts.CELL_SIZE, item[1] * consts.CELL_SIZE)
+        screen.blit(objects["grass"],place)
+def show_grass():
+    #returning grass after night mode
     for item in consts.grass_place:
         place = (item[0] * consts.CELL_SIZE, item[1] * consts.CELL_SIZE)
         screen.blit(objects["grass"],place)
@@ -69,3 +72,65 @@ def place_soldier(x,y):
     x = x*consts.CELL_SIZE
     y = y*consts.CELL_SIZE
     screen.blit(objects["soldier"],(x,y))
+
+def night_background():
+    for x in range(0, consts.WINDOW_WIDTH, consts.CELL_SIZE):
+        for y in range(0, consts.WINDOW_HEIGHT, consts.CELL_SIZE):
+            rect = pygame.Rect(x, y, consts.CELL_SIZE, consts.CELL_SIZE)
+            screen.fill(consts.BLACK, rect)
+            pygame.draw.rect(screen, consts.GREEN, rect, 1)
+
+
+def night_mode(x,y):
+    #the function gets the pos of the soldier and shows the bombs
+    x = x*consts.CELL_SIZE
+    y = y*consts.CELL_SIZE
+    night_background()
+    screen.blit(objects["night_soldier"],(x,y))
+    place_bombs()
+    time.sleep(consts.NIGHT_TIME)
+    pygame.display.update()
+
+
+def back_to_day(x,y):
+    #returns the board to regular mode
+    screen.fill(consts.GREEN)
+    show_grass()
+    place_soldier(x,y)
+
+
+
+#the step functions don't work
+def step_right(x,y):# x y is the soldiers current pos
+    for i in range(consts.CELL_SIZE//consts.SOLDIER_STEP):
+        x = x * consts.CELL_SIZE + consts.SOLDIER_STEP
+        y = y * consts.CELL_SIZE
+        screen.blit(objects["soldier"], (x, y))
+        time.sleep(0.01)
+
+def step_left(x,y):#x y is the soldiers current pos
+    for i in range(consts.CELL_SIZE // consts.SOLDIER_STEP):
+        x = x * consts.CELL_SIZE - consts.SOLDIER_STEP
+        y = y * consts.CELL_SIZE
+        screen.blit(objects["soldier"], (x, y))
+        pygame.display.update()
+
+
+def step_up(x,y):#x y is the soldiers current pos
+    for i in range(consts.CELL_SIZE // consts.SOLDIER_STEP):
+        x = x * consts.CELL_SIZE
+        y = y * consts.CELL_SIZE - consts.SOLDIER_STEP
+        screen.blit(objects["soldier"], (x, y))
+        pygame.display.update()
+
+def step_down(x,y):#x y is the soldiers current pos
+    for i in range(consts.CELL_SIZE // consts.SOLDIER_STEP):
+        x = x * consts.CELL_SIZE
+        y = y * consts.CELL_SIZE + consts.SOLDIER_STEP
+        screen.blit(objects["soldier"], (x, y))
+        pygame.display.update()
+        time.sleep(0.01)
+while True:
+    step_down(0, 0)
+
+

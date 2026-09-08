@@ -27,4 +27,7 @@ def set_location(row, col, direction):
 
     return None
 
+def animate_soldier():
+    soldier
+
 

@@ -38,7 +38,11 @@ FLAG_IMG = "bin/flag.png"
 GRASS_IMG = "bin/grass.png"
 BOMB_IMG = "bin/mine.png"
 
+SOLDIER_STEP = 5
+NIGHT_TIME = 1
+
 GREEN = (0,70,0)
+BLACK = (0,0,0)
 
 RUNNING_STATE = 1
 LOSE_STATE = 2

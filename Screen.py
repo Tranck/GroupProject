@@ -1,12 +1,11 @@
 import pygame
 import consts
 import random
-import time
+
 
 screen = pygame.display.set_mode(
         (consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
 screen.fill(consts.GREEN)
-
 
 objects = {} #loading all the images into here
 
@@ -45,22 +44,27 @@ objects["grass"] = create_grass()
 objects["night_soldier"] = create_night_soldier()
 
 
-screen.blit(objects["soldier"],(0,0))
-screen.blit(objects["bomb"], (100,100))
+
+
 def place_grass():
     #making a list of unique coordinates to place the grass
     while len(consts.grass_place) < consts.GRASS_COUNT:
         x = random.randrange(0, consts.BOARD_COLS, consts.GRASS_COLS)
         y = random.randrange(0, consts.BOARD_ROWS-1, consts.GRASS_ROWS)
-        if (x,y) not in consts.grass_place:
+        if (x,y) not in consts.grass_place and (x,y) not in consts.bomb_list:
             consts.grass_place.append((x,y))
     #blitsing the grass into the board
     for item in consts.grass_place:
         place = (item[0] * consts.CELL_SIZE, item[1] * consts.CELL_SIZE)
         screen.blit(objects["grass"],place)
 
-place_grass()
-screen.blit(objects["flag"], consts.FlAG_PLACE)
+def place_bombs():
+    for place in consts.bomb_list:
+        x = place[0] * consts.CELL_SIZE
+        y = place[1] * consts.CELL_SIZE
+        screen.blit(objects["bomb"],(x,y))
 
-pygame.display.update()
-time.sleep(3)
+def place_soldier(x,y):
+    x = x*consts.CELL_SIZE
+    y = y*consts.CELL_SIZE
+    screen.blit(objects["soldier"],(x,y))

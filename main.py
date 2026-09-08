@@ -1,5 +1,6 @@
 import pygame
 import pandas
+
 import consts
 import Soldier
 import game_field

@@ -8,7 +8,7 @@ WINDOW_HEIGHT = BOARD_ROWS * CELL_SIZE
 SOLDIER_ROWS = 4
 SOLDIER_COLS = 2
 SOLDIER_BODY_ROWS = 3   # the upper part
-SOLDIER_FEET_ROWS
+SOLDIER_FEET_ROWS = 1
 
 SOLDIER_HEIGHT = (SOLDIER_BODY_ROWS + SOLDIER_FEET_ROWS)*CELL_SIZE
 SOLDIER_WIDTH = SOLDIER_COLS * CELL_SIZE
@@ -30,6 +30,7 @@ MINE_COLS = 3
 EMPTY_CELL = "empty"
 FLAG_CELL = "flag"
 BOMB_CELL = "bomb"
+SOLDIER_CELL = "soldier"
 
 SOLDIER_IMG = "bin/soldier.png"
 NIGHT_SOLDIER_IMG = "bin/soldier_night.png"
@@ -37,10 +38,7 @@ FLAG_IMG = "bin/flag.png"
 GRASS_IMG = "bin/grass.png"
 BOMB_IMG = "bin/mine.png"
 
-
-
 GREEN = (0,70,0)
-SOLDIER_CELL = "soldier"
 
 RUNNING_STATE = 1
 LOSE_STATE = 2

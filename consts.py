@@ -16,3 +16,7 @@ FLAG_COLS = 4
 MINES_COUNT = 20
 MINE_ROWS = 1
 MINE_COLS = 3
+
+EMPTY_CELL = "empty"
+FLAG_CELL = "flag"
+BOMB_CELL = "bomb"

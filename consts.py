@@ -20,3 +20,7 @@ MINE_COLS = 3
 EMPTY_CELL = "empty"
 FLAG_CELL = "flag"
 BOMB_CELL = "bomb"
+
+RUNNING_STATE = 1
+LOSE_STATE = 2
+WIN_STATE = 3

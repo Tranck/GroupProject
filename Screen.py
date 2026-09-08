@@ -69,5 +69,3 @@ def place_soldier(x,y):
     x = x*consts.CELL_SIZE
     y = y*consts.CELL_SIZE
     screen.blit(objects["soldier"],(x,y))
-
-

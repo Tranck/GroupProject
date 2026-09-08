@@ -11,18 +11,17 @@ def soldier_head():
 
 
 #return left_foot
-def soldier_feet():
-    for row in range(consts.BOARD_ROWS):
-        for col in range(consts.BOARD_COLS):
-            if game_field.field[row][col] == consts.SOLDIER_CELL:
-                return consts.SOLDIER_BODY_ROWS + row, col
-    return None
+def soldier_feet(head):
+    return head[0] + consts.SOLDIER_BODY_ROWS, head[1] + consts.SOLDIER_COLS
 
 
-def border(new_location): #[0] - row, [1] - col
-    if new_location[0] == consts.BOARD_ROWS or new_location[1] == consts.BOARD_COLS:
-        return False
-    return True
+def border(head):
+    foot = soldier_feet(head)
+    if foot[0] < consts.BOARD_ROWS and foot[1] < consts.BOARD_COLS:
+        return True
+    elif head[0] < consts.BOARD_ROWS and foot[1] < consts.BOARD_COLS:
+        return True
+    return False
 
 
 

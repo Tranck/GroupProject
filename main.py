@@ -7,7 +7,8 @@ import Screen
 
 state = {
     "state": consts.RUNNING_STATE,
-    "is_window_open": True
+    "is_window_open": True,
+    "direction": ""
 }
 
 def main():
@@ -15,6 +16,9 @@ def main():
 
     while state["is_window_open"]:
         handle_user_events()
+
+        move_to()
+
 
 
 def handle_user_events():
@@ -27,24 +31,25 @@ def handle_user_events():
 
         if event.type == pygame.KEYDOWN:
             direction = event.key
-            if (direction == pygame.K_LEFT):
-                soldier_predict_location = Soldier.set_location(row, col, direction)
-                if Soldier.border(soldier_predict_location):
-                    game_field.place_soldier(soldier_predict_location)
+            if direction == pygame.K_LEFT: #move to left
+                state["direction"] = "left"
 
-            elif (direction == pygame.K_RIGHT):
-                soldier_predict_location = Soldier.set_location(row, col, direction)
-                if Soldier.border(soldier_predict_location):
-                    game_field.place_soldier(soldier_predict_location)
+            elif direction == pygame.K_RIGHT: #move to right
+                state["direction"] = "right"
 
-            elif (direction == pygame.K_UP):
-                soldier_predict_location = Soldier.set_location(row, col, direction)
-                if Soldier.border(soldier_predict_location):
-                    game_field.place_soldier(soldier_predict_location)
+            elif direction == pygame.K_UP: #move up
+                state["direction"] = "up"
 
-            elif (direction == pygame.K_DOWN):
-                soldier_predict_location = Soldier.set_location(row, col, direction)
-                if Soldier.border(soldier_predict_location):
-                    game_field.place_soldier(soldier_predict_location)
+            elif direction == pygame.K_DOWN: #move down
+                state["direction"] = "down"
 
+
+def move_to():
+    direction = state["direction"]
+    if not game_field.set_location(direction):
+        state["state"] = consts.LOSE_STATE
+    elif game_field.set_location(direction):
+        state["state"] = consts.WIN_STATE
+    else:
+        game_field.set_location(direction)
 

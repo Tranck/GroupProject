@@ -49,13 +49,15 @@ def set_location(direction):
     height = consts.SOLDIER_ROWS
     width = consts.SOLDIER_COLS
     
-    new_cells = [(row, col)
-                 for row in range(new_head_location[0], new_head_location[0] + height)
-                 for col in range(new_head_location[1], new_head_location[1] + width)]
+    new_cells = []
+    for row in range(new_head_location[0], new_head_location[0] + height):
+        for col in range(new_head_location[1], new_head_location[1] + width):
+            new_cells.append((row, col))
 
-    old_cells = [(row, col)
-                 for row in range(head[0], head[0] + height)
-                 for col in range(head[1], head[1] + width)]
+    old_cells = []
+    for row in range(head[0], head[0] + height):
+        for col in range(head[1], head[1] + width):
+            old_cells.append((row, col))
 
     for row, col in new_cells:
         if field[row][col] == consts.BOMB_CELL:

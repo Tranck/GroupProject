@@ -9,6 +9,9 @@ def soldier_head():
                 return row, col
     return None
 
+def animate_soldier():
+    soldier
+
 
 #return left_foot
 def soldier_feet(head):

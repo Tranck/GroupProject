@@ -67,6 +67,7 @@ def place_bombs():
         x = place[0] * consts.CELL_SIZE
         y = place[1] * consts.CELL_SIZE
         screen.blit(objects["bomb"],(x,y))
+        pygame.display.update()
 
 def place_soldier(x,y):
     x = x*consts.CELL_SIZE
@@ -99,38 +100,73 @@ def back_to_day(x,y):
     place_soldier(x,y)
 
 
+def pixel_place(pixel_x,pixel_y):
+    screen.blit(objects["soldier"],(pixel_x,pixel_y))
 
-#the step functions don't work
-def step_right(x,y):# x y is the soldiers current pos
-    for i in range(consts.CELL_SIZE//consts.SOLDIER_STEP):
-        x = x * consts.CELL_SIZE + consts.SOLDIER_STEP
-        y = y * consts.CELL_SIZE
-        screen.blit(objects["soldier"], (x, y))
-        time.sleep(0.01)
-
-def step_left(x,y):#x y is the soldiers current pos
-    for i in range(consts.CELL_SIZE // consts.SOLDIER_STEP):
-        x = x * consts.CELL_SIZE - consts.SOLDIER_STEP
-        y = y * consts.CELL_SIZE
-        screen.blit(objects["soldier"], (x, y))
+def move_down(x,y):
+    x_pixel = x*consts.CELL_SIZE
+    y_pixel = (y-1)*consts.CELL_SIZE
+    while y_pixel <y *consts.CELL_SIZE:
+        pixel_place(x_pixel, y_pixel)
         pygame.display.update()
+        screen.fill(consts.GREEN)
+        show_grass()
+        y_pixel += consts.SOLDIER_STEP
+        time.sleep(consts.SOLDIER_PACE)
 
-
-def step_up(x,y):#x y is the soldiers current pos
-    for i in range(consts.CELL_SIZE // consts.SOLDIER_STEP):
-        x = x * consts.CELL_SIZE
-        y = y * consts.CELL_SIZE - consts.SOLDIER_STEP
-        screen.blit(objects["soldier"], (x, y))
+def move_up(x,y):
+    x_pixel = x*consts.CELL_SIZE
+    y_pixel = (y+1)*consts.CELL_SIZE
+    while y_pixel >y *consts.CELL_SIZE:
+        pixel_place(x_pixel, y_pixel)
         pygame.display.update()
+        screen.fill(consts.GREEN)
+        show_grass()
+        y_pixel -= consts.SOLDIER_STEP
+        time.sleep(consts.SOLDIER_PACE)
 
-def step_down(x,y):#x y is the soldiers current pos
-    for i in range(consts.CELL_SIZE // consts.SOLDIER_STEP):
-        x = x * consts.CELL_SIZE
-        y = y * consts.CELL_SIZE + consts.SOLDIER_STEP
-        screen.blit(objects["soldier"], (x, y))
+def move_right(x,y):
+    x_pixel = (x-1)*consts.CELL_SIZE
+    y_pixel = y*consts.CELL_SIZE
+    while x_pixel <x *consts.CELL_SIZE:
+        pixel_place(x_pixel, y_pixel)
         pygame.display.update()
-        time.sleep(0.01)
+        screen.fill(consts.GREEN)
+        show_grass()
+        x_pixel += consts.SOLDIER_STEP
+        time.sleep(consts.SOLDIER_PACE)
+
+def move_left(x,y):
+    x_pixel = (x+1)*consts.CELL_SIZE
+    y_pixel = y*consts.CELL_SIZE
+    while x_pixel >x *consts.CELL_SIZE:
+        pixel_place(x_pixel, y_pixel)
+        pygame.display.update()
+        screen.fill(consts.GREEN)
+        show_grass()
+        x_pixel -= consts.SOLDIER_STEP
+        time.sleep(consts.SOLDIER_PACE)
+
+
+place_grass()
+c = 1
 while True:
-    step_down(0, 0)
+    if c == 1:
+        move_down(0, 1)
+        c+=1
+    place_soldier(0,1)
+    if c == 2:
+        move_right(1,1)
+        c+=1
+    place_soldier(1,1)
+    if c == 3:
+        move_left(0,1)
+        c+=1
+    place_soldier(0,1)
+    if c == 4:
+        move_up(0,0)
+        c+=1
+    place_soldier(0,0)
+
 
 

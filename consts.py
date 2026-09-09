@@ -10,15 +10,12 @@ SOLDIER_COLS = 2
 SOLDIER_BODY_ROWS = 3   # the upper part
 SOLDIER_FEET_ROWS = 1
 
-<<<<<<< HEAD
 FLAG_ROWS = 3
 FLAG_COLS = 4
-=======
 SOLDIER_HEIGHT = (SOLDIER_BODY_ROWS + SOLDIER_FEET_ROWS)*CELL_SIZE
 SOLDIER_WIDTH = SOLDIER_COLS * CELL_SIZE
 
-FLAG_ROWS = 3
-FLAG_COLS = 4
+
 FlAG_PLACE = (WINDOW_WIDTH - (FLAG_COLS * CELL_SIZE),WINDOW_HEIGHT - (FLAG_ROWS * CELL_SIZE))
 
 GRASS_ROWS = 2
@@ -26,7 +23,6 @@ GRASS_COLS = 2
 GRASS_SIZE = (CELL_SIZE*GRASS_ROWS,CELL_SIZE*GRASS_COLS)
 grass_place = []
 GRASS_COUNT = 20
->>>>>>> main
 
 MINES_COUNT = 20
 MINE_ROWS = 1
@@ -37,8 +33,7 @@ FLAG_CELL = "flag"
 BOMB_CELL = "bomb"
 SOLDIER_CELL = "soldier"
 
-<<<<<<< HEAD
-=======
+
 SOLDIER_IMG = "bin/soldier.png"
 NIGHT_SOLDIER_IMG = "bin/soldier_night.png"
 FLAG_IMG = "bin/flag.png"
@@ -47,7 +42,6 @@ BOMB_IMG = "bin/mine.png"
 
 GREEN = (0,70,0)
 
->>>>>>> main
 RUNNING_STATE = 1
 LOSE_STATE = 2
 WIN_STATE = 3

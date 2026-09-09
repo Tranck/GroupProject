@@ -5,6 +5,11 @@ import random
 
 screen = pygame.display.set_mode(
         (consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
+import random
+
+
+screen = pygame.display.set_mode(
+        (consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
 screen.fill(consts.GREEN)
 
 objects = {} #loading all the images into here

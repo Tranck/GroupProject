@@ -16,10 +16,13 @@ def soldier_feet(head):
 
 
 def border(head):
-    foot = soldier_feet(head)
-    if foot[0] < consts.BOARD_ROWS and foot[1] < consts.BOARD_COLS:
-        return True
-    elif head[0] < consts.BOARD_ROWS and foot[1] < consts.BOARD_COLS:
+    height = consts.SOLDIER_ROWS
+    width = consts.SOLDIER_COLS
+    if head[0] < 0 or head[1] < 0:
+        return False
+    if head[0] + height > consts.BOARD_ROWS or head[1] + width > consts.BOARD_COLS:
+        return False
+    if head[0] + height < consts.BOARD_ROWS and head[1] + width < consts.BOARD_COLS:
         return True
     return False
 

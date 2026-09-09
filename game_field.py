@@ -42,19 +42,34 @@ def set_location(direction):
     head = Soldier.soldier_head()
 
     new_head_location = check_cell(head[0], head[1], direction)
-    if Soldier.border(new_head_location):
-        for row in range(new_head_location[0] + consts.SOLDIER_BODY_ROWS, new_head_location[0], - 1):
-            for col in range(new_head_location[1], new_head_location[1] + consts.SOLDIER_COLS):
-                if field[row][col] == consts.BOMB_CELL:
-                    return False
-                elif field[row][col] == consts.FLAG_CELL:
-                    return True
-                elif field[row][col] == consts.EMPTY_CELL:
-                    field[row][col] = consts.SOLDIER_CELL
-                    field[head[0]][head[1]] = consts.EMPTY_CELL
-                    field[head[0]][head[1] + 1] = consts.EMPTY_CELL
-    else:
+    if not Soldier.border(new_head_location):
         print("Out of board")
+        return None
+
+    height = consts.SOLDIER_ROWS
+    width = consts.SOLDIER_COLS
+    
+    new_cells = []
+    for row in range(new_head_location[0], new_head_location[0] + height):
+        for col in range(new_head_location[1], new_head_location[1] + width):
+            new_cells.append((row, col))
+
+    old_cells = []
+    for row in range(head[0], head[0] + height):
+        for col in range(head[1], head[1] + width):
+            old_cells.append((row, col))
+
+    for row, col in new_cells:
+        if field[row][col] == consts.BOMB_CELL:
+            return consts.LOSE_STATE
+        elif field[row][col] == consts.FLAG_CELL:
+            return consts.WIN_STATE
+
+    for row, col in old_cells:
+        field[row][col] = consts.EMPTY_CELL
+
+    for row, col in new_cells:
+        field[row][col] = consts.SOLDIER_CELL
 
     return None
 

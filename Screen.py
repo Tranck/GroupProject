@@ -1,11 +1,10 @@
 import pygame
 import consts
-<<<<<<< HEAD
-import math
+import random
+
 
 screen = pygame.display.set_mode(
         (consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
-=======
 import random
 
 
@@ -74,4 +73,3 @@ def place_soldier(x,y):
     x = x*consts.CELL_SIZE
     y = y*consts.CELL_SIZE
     screen.blit(objects["soldier"],(x,y))
->>>>>>> main

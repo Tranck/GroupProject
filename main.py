@@ -1,13 +1,7 @@
 import pygame
 import pandas
 import consts
-<<<<<<< HEAD
-import Soldier
 import game_field
-import Screen
-=======
-import game_field
->>>>>>> main
 
 state = {
     "state": consts.RUNNING_STATE,
@@ -24,7 +18,6 @@ def main():
         move_to()
 
 
-
 def handle_user_events():
     for event in pygame.event.get():
         if event == pygame.QUIT:
@@ -36,18 +29,6 @@ def handle_user_events():
         if event.type == pygame.KEYDOWN:
             direction = event.key
             if direction == pygame.K_LEFT: #move to left
-<<<<<<< HEAD
-                state["direction"] = "left"
-
-            elif direction == pygame.K_RIGHT: #move to right
-                state["direction"] = "right"
-
-            elif direction == pygame.K_UP: #move up
-                state["direction"] = "up"
-
-            elif direction == pygame.K_DOWN: #move down
-                state["direction"] = "down"
-=======
                 state["direction"] = consts.LEFT
 
             elif direction == pygame.K_RIGHT: #move to right
@@ -58,26 +39,16 @@ def handle_user_events():
 
             elif direction == pygame.K_DOWN: #move down
                 state["direction"] = consts.DOWN
->>>>>>> main
 
 
 def move_to():
     direction = state["direction"]
-<<<<<<< HEAD
-    if not game_field.set_location(direction):
-        state["state"] = consts.LOSE_STATE
-    elif game_field.set_location(direction):
-        state["state"] = consts.WIN_STATE
-    else:
-        game_field.set_location(direction)
-=======
     if not direction:
         return
-    state["direction"] = ""
     res = game_field.set_location(direction)
+    state["direction"] = ""
     if res == consts.LOSE_STATE:
         state["state"] = consts.LOSE_STATE
     elif res == consts.WIN_STATE:
         state["state"] = consts.WIN_STATE
->>>>>>> main
 

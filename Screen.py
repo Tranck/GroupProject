@@ -148,7 +148,7 @@ def move_left(x,y):
         time.sleep(consts.SOLDIER_PACE)
 
 
-place_grass()
+"""place_grass()
 c = 1
 while True:
     if c == 1:
@@ -167,6 +167,6 @@ while True:
         move_up(0,0)
         c+=1
     place_soldier(0,0)
-
+"""
 
 
